@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React from "react";
+// import Login from "./Component/login";
+import styles from './Component/component.module.scss'
+import Headers from "./Component/header";
+// import { ThemeProvider } from "@material-ui/styles";
+// import { createTheme } from "@mui/material";
 function App() {
+  // const CustomFontTheme = createTheme({
+  //   typography: {
+  //     fontSize: 70,
+  //     fontFamily:'sans-serif'
+  //   }
+  // });
+  console.log(5)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={styles.bgApp}>
+      <Headers />
     </div>
   );
 }

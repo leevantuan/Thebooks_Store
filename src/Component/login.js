@@ -1,4 +1,4 @@
-import { React } from 'react'
+import { React, useState } from 'react'
 import styles from './component.module.scss'
 // import clsx from 'clsx';
 
@@ -9,8 +9,35 @@ import { FaUserFriends } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
 import { Checkbox } from '@mui/material';
 import { FormControlLabel , Button } from '@mui/material'; 
+import { json } from 'react-router-dom';
+
+const user = {
+    "email": "user1@example.com",
+    "password": "User123@"
+  }
 
 export default function Login() {
+  const [email , setEmail ] = useState("");
+  const [password , setPassword] = useState("");
+  const [token , setToken] = useState("");
+  
+  const handleLogin = () => {
+    fetch(
+      "https://localhost:7229/api/Authentication/login",{
+        method:"post",        
+        headers: { 'Content-Type': 'application/json' },
+        body:JSON.stringify({
+          email: "user1@example.com",
+          password: "User123@",
+        }),
+    })
+    .then((res) => res.json())
+      .then((res) => {
+          console.log(res)
+          setToken(res);
+      })
+  }
+  
 
   return (
     <div className={styles.lgContainer}>
@@ -23,15 +50,15 @@ export default function Login() {
             <span className={styles.icons}>
               <FaUserCheck />
             </span>
-            <input type="user" required />
-            <label className={styles.lbLogin}>UserName</label>
+            <input type="email" onChange={(e)=>{setEmail(e.target.value)}} required />
+            <label className={styles.lbLogin}>Email</label>
           </div>
 
           <div className={styles.inputBox}>
             <span className={styles.icons}>
               <FaUnlockAlt />
             </span>
-            <input type="pass" required />
+            <input type="pass" onChange={(e)=>{setPassword(e.target.value)}} required />
             <label className={styles.lbLogin}>PassWord</label>
           </div>
 
@@ -40,7 +67,7 @@ export default function Login() {
 
         </div>
         <div className={styles.btnLogin}>
-        <Button className={styles.btnClickLogin} variant="contained" href="#contained-buttons">Login</Button>
+        <Button className={styles.btnClickLogin} onClick = {()=>{handleLogin()}} variant="contained" href="#contained-buttons">Login</Button>
         </div>  
 
         <div className={styles.create}>

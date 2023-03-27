@@ -7,34 +7,6 @@ import CartProduct from './cartproduct';
 import ProductItem from './productItem';
 import { json } from 'react-router-dom';
 
-
-
-const cartData = [
-    {
-        id: "1",
-        img: "http://localhost:3000/static/media/product.061b9fb8d8537506d31d.jpg",
-        name: "Thunder Stunt",
-        price: 54.78,
-        title: "Thunder Stunt",
-        quantity: 2
-    },
-    {
-        id: "2",
-        img: "http://localhost:3000/static/media/product.061b9fb8d8537506d31d.jpg",
-        name: "Thunder bolt",
-        price: 20.00,
-        title: "Thunder Stunt",
-        quantity: 2
-    },
-    {
-        id: "3",
-        img: "http://localhost:3000/static/media/product.061b9fb8d8537506d31d.jpg",
-        name: "Thunder bolt",
-        price: 40.00,
-        title: "Thunder Stunt",
-        quantity: 2
-    },
-]
 const username = "user@example.com";
 export default function Shop() {
     const [products, setProduct] = useState([]);

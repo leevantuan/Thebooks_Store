@@ -1,5 +1,7 @@
-import { React } from 'react'
+import { React, useState } from 'react'
+import jwt_decode from "jwt-decode";
 import styles from './component.module.scss'
+
 // import clsx from 'clsx';
 
 import { FaUserCheck } from "react-icons/fa";
@@ -9,8 +11,59 @@ import { FaUserFriends } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
 import { Checkbox } from '@mui/material';
 import { FormControlLabel , Button } from '@mui/material'; 
+import { json } from 'react-router-dom';
+
+const user = {
+    "email": "user1@example.com",
+    "password": "User123@"
+  }
 
 export default function Login() {
+  const [email , setEmail ] = useState("");
+  const [password , setPassword] = useState("");
+
+
+  //dong nay de luu thong tin dang nhap
+ 
+
+  const loginCheck = ()=>{
+    //lay thong tin dang nhap
+    var token = localStorage.getItem('token');
+    if(token)
+    {
+      console.log("Da co tai khoan dang nhap" + token)
+    }
+  }
+  
+  const handleLogin = () => {
+    fetch(
+      "https://thebookstore.azurewebsites.net/api/Authentication/login",{
+        method:"post",        
+        headers: { 'Content-Type': 'application/json' },
+        body:JSON.stringify({
+          email: "user1@example.com",
+          password: "User123@",
+        }),
+    })
+    .then((res) => res.json())
+      .then((res) => {
+          console.log(res)
+          //luu thong tin dang nhap vao localstorage
+          localStorage.setItem('token', JSON.stringify(res));
+          var token = localStorage.getItem('token');
+          console.log(token)
+          var decoded = jwt_decode(token);
+ 
+          console.log(decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]);
+      })      
+      
+  }
+  const handleLogout = ()=>{
+    localStorage.removeItem('token');
+    var token = localStorage.getItem('token');
+    if(!token) alert("Dang xuat thanh cong!");
+  }
+  
 
   return (
     <div className={styles.lgContainer}>
@@ -23,15 +76,15 @@ export default function Login() {
             <span className={styles.icons}>
               <FaUserCheck />
             </span>
-            <input type="user" required />
-            <label className={styles.lbLogin}>UserName</label>
+            <input type="email" onChange={(e)=>{setEmail(e.target.value)}} required />
+            <label className={styles.lbLogin}>Email</label>
           </div>
 
           <div className={styles.inputBox}>
             <span className={styles.icons}>
               <FaUnlockAlt />
             </span>
-            <input type="pass" required />
+            <input type="pass" onChange={(e)=>{setPassword(e.target.value)}} required />
             <label className={styles.lbLogin}>PassWord</label>
           </div>
 
@@ -40,7 +93,9 @@ export default function Login() {
 
         </div>
         <div className={styles.btnLogin}>
-        <Button className={styles.btnClickLogin} variant="contained" href="#contained-buttons">Login</Button>
+        <Button className={styles.btnClickLogin} onClick = {()=>{handleLogin()}} variant="contained" href="#contained-buttons">Login</Button>
+        <Button className={styles.btnClickLogin} onClick = {()=>{handleLogout()}} variant="contained" href="#contained-buttons">Logout</Button>
+
         </div>  
 
         <div className={styles.create}>

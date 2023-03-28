@@ -11,6 +11,7 @@ const username = 'user@example.com';
 export default function CartView() {
     const [products, setProduct] = useState([]);
     const [carts, setCart] = useState([]);
+    const [showCart, setShowCart] = useState(true);
     useEffect(() => {
         fetch('https://thebookstore.azurewebsites.net/api/Products')
             .then((res) => res.json())
@@ -79,10 +80,10 @@ export default function CartView() {
 
                     <div className="payment-page2">
                         <div className="payment-online">
-                            <input type="checkbox" />
+                            <input type="checkbox" onClick={() => setShowCart(!showCart)} />
                             <p>Payment online</p>
                         </div>
-                        <div className="cart-or-visa">
+                        <div className="cart-or-visa" hidden={showCart}>
                             <div className="name-cart">
                                 <div className="i-pay">
                                     <input type="checkbox" />
@@ -107,7 +108,6 @@ export default function CartView() {
                                     <input type="text" placeholder="123" />
                                 </div>
                             </div>
-                            <button type="submit">Pay</button>
                         </div>
                     </div>
 

@@ -15,16 +15,9 @@ import { FormControlLabel, Button } from '@mui/material';
 export default function Login() {
     const [email, setEmail] = useState('user1');
     const [password, setPassword] = useState('');
-    console.log(email);
+    const [name, setName] = useState("User")
     //dong nay de luu thong tin dang nhap
 
-
-    console.log(
-        JSON.stringify({
-            email,
-            password,
-        }),
-    );
     const handleLogin = () => {
         fetch('https://thebookstore.azurewebsites.net/api/Authentication/login', {
             method: 'post',
@@ -43,6 +36,8 @@ export default function Login() {
         var token = loginCheck();
         if (token) {
             alert(`Dang nhap thanh cong! Xin chao ${token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]}`)
+            window.location = '/'
+            setName(`${token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]}`)
         }
     };
     const handleLogout = () => {

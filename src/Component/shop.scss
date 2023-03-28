@@ -2,6 +2,8 @@
     width: 100%;
     min-height: 1100px;
     padding-bottom: 50px;
+    background-color: #ffffff8f;
+    position: relative;
 }
 .content {
     width: 1200px;
@@ -13,18 +15,17 @@
 }
 .product {
     position: relative;
-    width: 270px;
+    width: 280px;
     height: 490px;
-    border: 1px solid #a5a5a56e;
-    border-radius: 10px;
-    background-color: #fff;
-    padding: 22px;
+    border-radius: 5px;
+    background-color: #ffffffea;
+    padding: 24px;
     box-sizing: border-box;
     transition: 0.3s;
-    margin-top: 10px;
-    margin: 10px;
+    margin: 20px 5px;
+    text-decoration: none;
     > img {
-        width: 224px;
+        width: 232px;
         height: 320px;
     }
     > h2 {
@@ -40,7 +41,6 @@
         text-align: center;
         color: #e28903e7;
         margin-top: -8px;
-        opacity: 1;
         transition: 0.3s;
     }
     > ul {
@@ -48,23 +48,17 @@
         color: #e28903e7;
         font-size: 20px;
         margin-top: -4px;
-        opacity: 1;
         transition: 0.3s;
     }
     > h1 {
         position: absolute;
-        left: 20%;
-        top: 365px;
+        left: 40%;
+        top: 400px;
         font-size: 24px;
+        font-weight: 400;
         display: flex;
-        color: #e28903e7;
-        opacity: 0;
+        color: rgb(255, 77, 77);
         transition: 0.3s;
-        > p:nth-child(2) {
-            color: #79797998;
-            margin-left: 5px;
-            text-decoration-line: line-through;
-        }
     }
     > button {
         position: absolute;
@@ -80,26 +74,6 @@
         opacity: 0;
         cursor: pointer;
         transition: 0.3s;
-    }
-    &:hover {
-        height: 530px;
-        > button {
-            opacity: 1;
-            transition: 0.5s;
-        }
-        > h1 {
-            opacity: 1;
-            transition: 0.5s;
-        }
-        > p {
-            opacity: 0;
-            transition: 0.3s;
-        }
-        > ul {
-            opacity: 0;
-            transition: 0.3s;
-        }
-        box-sizing: border-box;
     }
     > div {
         width: 50px;
@@ -117,10 +91,58 @@
         }
     }
 }
+.title_books {
+    width: 1170px;
+    margin: 0 auto;
+    padding-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    > button {
+        display: flex;
+        font-size: 24px;
+        font-weight: bold;
+        margin: 0 !important;
+        height: 35px !important;
+        margin-top: 25px !important;
+        cursor: pointer;
+        > p {
+            margin: 0 !important;
+        }
+        > i {
+            margin: 0;
+            margin-left: 10px;
+        }
+    }
+    > p {
+        font-size: 36px;
+        margin-bottom: -10px;
+    }
+}
+
+.title {
+    width: 1200px;
+    margin: 50px auto 10px;
+    font-size: 28px;
+}
+.cart-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #dadada4b;
+    z-index: 99;
+}
 .Cart {
-    width: 800px;
-    min-height: 200px;
-    margin: 50px auto;
+    width: 400px;
+    min-height: 100px;
+    position: absolute;
+    top: 70px;
+    right: 100px;
+    z-index: 99;
+    background-color: #d4d4d4;
+    padding: 10px;
+    border-radius: 10px;
     > h2 {
         text-align: center;
     }
@@ -153,6 +175,9 @@
                     align-self: center;
                 }
             }
+            > td:nth-child(2) {
+                color: #333;
+            }
             > td:nth-child(3) > input {
                 width: 30px;
             }
@@ -163,17 +188,42 @@
     }
 }
 .total {
-    margin: 20px;
+    margin: 10px;
     display: flex;
     float: right;
     font-size: 16px;
     font-weight: 500;
-    > p:nth-child(2) {
-        margin-left: 10px;
+
+    > p:nth-child(1) {
+        margin-right: 220px;
+        font-size: 20px;
     }
 }
-.title {
-    width: 1200px;
-    margin: 50px auto 10px;
-    font-size: 28px;
+// dilter ------------------------
+.filter-product {
+    position: absolute;
+    left: 5%;
+    top: 5%;
+    > ul {
+        font-size: 28px;
+        margin-bottom: 10px;
+        font-weight: bold;
+        > li {
+            list-style: none;
+            font-size: 24px;
+            font-weight: 400;
+            padding: 8px 60px 8px 16px;
+            margin-left: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            &:hover {
+                background-color: rgb(196, 196, 196);
+            }
+            > input {
+                width: 16px;
+                height: 16px;
+            }
+        }
+    }
 }

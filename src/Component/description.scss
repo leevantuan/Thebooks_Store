@@ -1,0 +1,75 @@
+.description-container {
+    width: 100%;
+    min-height: 100%;
+    background-color: rgb(235, 235, 235, 1);
+    .description-content {
+        width: 1200px;
+        min-height: 200px;
+        margin: 0 auto;
+        padding: 80px 0 120px;
+        display: flex;
+        .content-left {
+            width: 400px;
+            > img {
+                width: 300px;
+            }
+        }
+        .content-right {
+            width: 800px;
+            > ul {
+                color: rgb(255, 196, 0);
+                > i {
+                    margin: 0 2px;
+                }
+            }
+            > span {
+                display: block;
+                width: 60px;
+                height: 30px;
+                border: 1px solid rgb(255, 196, 0);
+                margin: 20px 10px;
+                font-size: 20px;
+                padding-left: 10px;
+                font-weight: bold;
+                background: rgb(255, 231, 152);
+                cursor: pointer;
+                transition: 0.3s;
+                &:hover {
+                    background: rgb(255, 223, 116);
+                }
+            }
+            > p {
+                font-size: 16px;
+                letter-spacing: 0.5px;
+            }
+            > div > button {
+                font-size: 16px;
+                font-weight: bold;
+                padding: 12px 20px;
+                background: rgb(255, 198, 10);
+                cursor: pointer;
+                transition: 0.3s;
+                border: none;
+                margin: 10px;
+                border-radius: 5px;
+                &:hover {
+                    background: rgb(255, 223, 116);
+                }
+            }
+            > div > button:nth-child(2) {
+                background: rgb(255, 42, 26);
+                &:hover {
+                    background: rgb(255, 116, 116);
+                }
+            }
+        }
+    }
+    .custom-page2 {
+        padding-bottom: 200px;
+        > p {
+            width: 600px;
+            margin: auto;
+            border-top: 1px solid rgb(194, 194, 194);
+        }
+    }
+}

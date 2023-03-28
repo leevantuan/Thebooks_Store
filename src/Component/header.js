@@ -56,10 +56,9 @@ export default function Headers() {
         fetch('https://thebookstore.azurewebsites.net/api/Products')
             .then((res) => res.json())
             .then((json) => {
-                console.log(json);
+
                 setProduct(json);
             });
-
         fetch(`https://thebookstore.azurewebsites.net/api/Cart/username`, {
             method: 'get',
             headers: { username },
@@ -70,9 +69,8 @@ export default function Headers() {
                 setCart(json);
             });
 
-        console.log(getProductById(28));
         const btn = Array.from(document.getElementsByClassName('btn_cart'));
-        btn.forEach(function (button, index) {});
+        btn.forEach(function (button, index) { });
     }, []);
     const getProductById = (id) => {
         return products.filter((e) => e.id == id);
@@ -107,7 +105,6 @@ export default function Headers() {
     // mui --------------------------
 
     const [search, setSearch] = useState('');
-    console.log(3);
     const [showCart, setShowCart] = useState(false);
 
     return (

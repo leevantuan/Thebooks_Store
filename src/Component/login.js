@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
-import jwt_decode from 'jwt-decode';
 import styles from './component.module.scss';
+import loginCheck from './Authen/loginCheck.js'
 
 // import clsx from 'clsx';
 
@@ -11,12 +11,6 @@ import { FaUserFriends } from 'react-icons/fa';
 import { FaHome } from 'react-icons/fa';
 import { Checkbox } from '@mui/material';
 import { FormControlLabel, Button } from '@mui/material';
-import { json } from 'react-router-dom';
-
-const user = {
-    email: 'user1@example.com',
-    password: 'User123@',
-};
 
 export default function Login() {
     const [email, setEmail] = useState('user1');
@@ -24,12 +18,7 @@ export default function Login() {
     console.log(email);
     //dong nay de luu thong tin dang nhap
 
-    const loginCheck = () => {
-        var token = localStorage.getItem('token');
-        if (token) {
-            console.log(token);
-        }
-    };
+
     console.log(
         JSON.stringify({
             email,
@@ -50,13 +39,11 @@ export default function Login() {
                 console.log(res);
                 //luu thong tin dang nhap vao localstorage
                 localStorage.setItem('token', JSON.stringify(res));
-                var token = localStorage.getItem('token');
-                console.log(token);
-                var decoded = jwt_decode(token);
-
-                console.log(decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress']);
-                console.log(decoded);
             });
+        var token = loginCheck();
+        if (token) {
+            alert(`Dang nhap thanh cong! Xin chao ${token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]}`)
+        }
     };
     const handleLogout = () => {
         localStorage.removeItem('token');

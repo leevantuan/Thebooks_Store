@@ -16,7 +16,6 @@ export default function Shop() {
         fetch('https://thebookstore.azurewebsites.net/api/Products')
             .then((res) => res.json())
             .then((json) => {
-                console.log(json);
                 setProduct(json);
             });
 
@@ -26,11 +25,10 @@ export default function Shop() {
         })
             .then((res) => res.json())
             .then((json) => {
-                console.log(json);
                 setCart(json);
             });
         const btn = Array.from(document.getElementsByClassName('btn_cart'));
-        btn.forEach(function (button, index) {});
+        btn.forEach(function (button, index) { });
     }, []);
     const getProductById = (id) => {
         return products.filter((e) => e.id == id);

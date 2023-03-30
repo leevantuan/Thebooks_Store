@@ -34,7 +34,7 @@ import ShareIcon from '@mui/icons-material/Share';
 
 import Home from './home';
 import Login from './login';
-import Product from './product';
+import Product from './Admin/addProduct';
 import Shop from './Shop';
 // import SignUp from './SignUp'
 import styles from './component.module.scss';

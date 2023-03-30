@@ -1,8 +1,8 @@
-import styles from './component.module.scss'
+import styles from '../component.module.scss'
 import { FaAngleRight } from "react-icons/fa";
 import clsx from 'clsx';
 import { useCallback, useState } from 'react';
-import GetCategory from './fetchData/getCategory';
+import GetCategory from '../fetchData/getCategory';
 
 export default function Product() {
 

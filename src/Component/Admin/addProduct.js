@@ -32,6 +32,9 @@ export default function Product() {
         <span className={styles.pdTitle_icons}><FaAngleRight /></span>
         <h2 className={styles.pdTitle_text}>Thể Loại</h2>
       </div>
+
+
+
       <div className={styles.pdContainer}>
 
         <div className={clsx(styles.type, styles.dsFlex)}>
@@ -45,6 +48,8 @@ export default function Product() {
             disabled={!list}
             onClick={HandleClick}
             className={styles.btnTL_admin} >Add</button>
+
+
         </div>
 
         <ol className={styles.tlAdmin} >

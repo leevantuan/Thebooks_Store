@@ -49,7 +49,7 @@ import ProductItem from './productItem';
 import { json } from 'react-router-dom';
 
 const username = 'user@example.com';
-export default function Headers() {
+export default function Headers(props) {
     const [products, setProduct] = useState([]);
     const [carts, setCart] = useState([]);
     useEffect(() => {
@@ -144,7 +144,7 @@ export default function Headers() {
                                 {/* mui----------------------------------------------  */}
 
                                 {/* User Name */}
-                                <p style={{ color: '#1c0083', fontWeight: 'bold' }}>User</p>
+                                <p style={{ color: '#1c0083', fontWeight: 'bold' }}>{Login.name}</p>
                             </Link>
                         </li>
                     </ul>

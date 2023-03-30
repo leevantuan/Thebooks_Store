@@ -15,7 +15,6 @@ import { FormControlLabel, Button } from '@mui/material';
 export default function Login() {
     const [email, setEmail] = useState('user1');
     const [password, setPassword] = useState('');
-    const [name, setName] = useState("User")
     //dong nay de luu thong tin dang nhap
 
     const handleLogin = () => {
@@ -37,13 +36,12 @@ export default function Login() {
         if (token) {
             alert(`Dang nhap thanh cong! Xin chao ${token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]}`)
             window.location = '/'
-            setName(`${token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]}`)
         }
     };
     const handleLogout = () => {
-        localStorage.removeItem('token');
+        // localStorage.removeItem('token')
         var token = localStorage.getItem('token');
-        if (!token) alert('Dang xuat thanh cong!');
+        if (token) alert('Dang xuat thanh cong!');
     };
 
     return (

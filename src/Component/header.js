@@ -47,9 +47,16 @@ import { duration } from '@material-ui/core';
 import CartProduct from './cartproduct';
 import ProductItem from './productItem';
 import { json } from 'react-router-dom';
+import loginCheck from './Authen/loginCheck';
 
 const username = 'user@example.com';
 export default function Headers(props) {
+    const [userName, setUserName] = useState('Login')
+    setUserName()
+    // var token = loginCheck();
+    // if (token) {
+    //     setUserName(`${token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]}`)
+    // }
     const [products, setProduct] = useState([]);
     const [carts, setCart] = useState([]);
     useEffect(() => {
@@ -144,7 +151,7 @@ export default function Headers(props) {
                                 {/* mui----------------------------------------------  */}
 
                                 {/* User Name */}
-                                <p style={{ color: '#1c0083', fontWeight: 'bold' }}>{Login.name}</p>
+                                <p style={{ color: '#1c0083', fontWeight: 'bold' }}>{userName}</p>
                             </Link>
                         </li>
                     </ul>

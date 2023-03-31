@@ -6,7 +6,6 @@ import { FaBars } from 'react-icons/fa';
 import ProductItem from './productItem';
 
 
-const username = 'user@example.com';
 export default function Shop() {
     const [products, setProduct] = useState([]);
     useEffect(() => {
@@ -14,14 +13,6 @@ export default function Shop() {
             .then((res) => res.json())
             .then((json) => {
                 setProduct(json);
-            });
-
-        fetch(`https://thebookstore.azurewebsites.net/api/Cart/username`, {
-            method: 'get',
-            headers: { username },
-        })
-            .then((res) => res.json())
-            .then((json) => {
             });
         const btn = Array.from(document.getElementsByClassName('btn_cart'));
         btn.forEach(function (button, index) { });

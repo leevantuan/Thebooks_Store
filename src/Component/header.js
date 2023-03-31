@@ -31,7 +31,8 @@ import ShareIcon from '@mui/icons-material/Share';
 
 import Home from './home';
 import Login from './login';
-import Product from './Admin/addProduct';
+import Category from './Admin/category';
+import Product from './Admin/product';
 import Shop from './Shop';
 // import SignUp from './SignUp'
 import styles from './component.module.scss';
@@ -53,7 +54,7 @@ export default function Headers(props) {
     useEffect(() => {
         if (token) {
             username = token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]
-            console.log(username)
+
             fetch(`https://thebookstore.azurewebsites.net/api/Cart/username`, {
                 method: 'get',
                 headers: { username },
@@ -218,7 +219,8 @@ export default function Headers(props) {
             </div>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/admin" element={<Product />} />
+                <Route path="/admin/category" element={<Category />} />
+                <Route path="/admin/product" element={<Product />} />
                 <Route path="/Login" element={<Login />} />
                 <Route path="/shop" element={<Shop />} />
                 <Route path="/cart" element={<CartView />} />

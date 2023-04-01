@@ -25,59 +25,50 @@ import Box from '@mui/material/Box';
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
-import FileCopyIcon from '@mui/icons-material/FileCopyOutlined';
-import SaveIcon from '@mui/icons-material/Save';
-import PrintIcon from '@mui/icons-material/Print';
 import ShareIcon from '@mui/icons-material/Share';
 
 //-----------------------------------
 
 import Home from './home';
 import Login from './login';
-import Product from './product';
+import Category from './Admin/category';
+import Product from './Admin/product';
 import Shop from './Shop';
 // import SignUp from './SignUp'
 import styles from './component.module.scss';
 import CartView from './CartView';
 import Description from './descriptionItem';
+import loginCheck from './Authen/loginCheck';
 
 import './shop.scss';
-import { FaStar } from 'react-icons/fa';
-import { duration } from '@material-ui/core';
+
 import CartProduct from './cartproduct';
 import ProductItem from './productItem';
 import { json } from 'react-router-dom';
-import loginCheck from './Authen/loginCheck';
 
-const username = 'user@example.com';
 export default function Headers(props) {
-    const [userName, setUserName] = useState('Login')
-    setUserName()
-    // var token = loginCheck();
-    // if (token) {
-    //     setUserName(`${token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]}`)
-    // }
     const [products, setProduct] = useState([]);
     const [carts, setCart] = useState([]);
+    var username = "";
     useEffect(() => {
+        if (token) {
+            username = token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]
+
+            fetch(`https://thebookstore.azurewebsites.net/api/Cart/username`, {
+                method: 'get',
+                headers: { username },
+            })
+                .then((res) => res.json())
+                .then((json) => {
+                    setCart(json);
+                });
+        }
+
         fetch('https://thebookstore.azurewebsites.net/api/Products')
             .then((res) => res.json())
             .then((json) => {
-
                 setProduct(json);
             });
-        fetch(`https://thebookstore.azurewebsites.net/api/Cart/username`, {
-            method: 'get',
-            headers: { username },
-        })
-            .then((res) => res.json())
-            .then((json) => {
-                console.log(json);
-                setCart(json);
-            });
-
-        const btn = Array.from(document.getElementsByClassName('btn_cart'));
-        btn.forEach(function (button, index) { });
     }, []);
     const getProductById = (id) => {
         return products.filter((e) => e.id == id);
@@ -151,7 +142,7 @@ export default function Headers(props) {
                                 {/* mui----------------------------------------------  */}
 
                                 {/* User Name */}
-                                <p style={{ color: '#1c0083', fontWeight: 'bold' }}>{userName}</p>
+                                <p style={{ color: '#1c0083', fontWeight: 'bold' }}>{Login.name}</p>
                             </Link>
                         </li>
                     </ul>
@@ -227,7 +218,8 @@ export default function Headers(props) {
             </div>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/admin" element={<Product />} />
+                <Route path="/admin/category" element={<Category />} />
+                <Route path="/admin/product" element={<Product />} />
                 <Route path="/Login" element={<Login />} />
                 <Route path="/shop" element={<Shop />} />
                 <Route path="/cart" element={<CartView />} />

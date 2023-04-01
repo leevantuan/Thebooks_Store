@@ -1,38 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import './shop.scss';
-import { FaStar } from 'react-icons/fa';
-import { FaBars } from 'react-icons/fa';
-import { FaRegHeart } from 'react-icons/fa';
-import { duration } from '@material-ui/core';
-import CartProduct from './cartproduct';
-import ProductItem from './productItem';
-import { json } from 'react-router-dom';
 
-const username = 'user@example.com';
+import { FaBars } from 'react-icons/fa';
+
+import ProductItem from './productItem';
+
+
 export default function Shop() {
     const [products, setProduct] = useState([]);
-    const [carts, setCart] = useState([]);
     useEffect(() => {
         fetch('https://thebookstore.azurewebsites.net/api/Products')
             .then((res) => res.json())
             .then((json) => {
                 setProduct(json);
             });
-
-        fetch(`https://thebookstore.azurewebsites.net/api/Cart/username`, {
-            method: 'get',
-            headers: { username },
-        })
-            .then((res) => res.json())
-            .then((json) => {
-                setCart(json);
-            });
         const btn = Array.from(document.getElementsByClassName('btn_cart'));
         btn.forEach(function (button, index) { });
     }, []);
-    const getProductById = (id) => {
-        return products.filter((e) => e.id == id);
-    };
+
     const handleFT = (e) => {
         const nameFT = e.target.value;
         if (e.target.checked === true) {

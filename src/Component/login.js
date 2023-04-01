@@ -15,6 +15,7 @@ import { FormControlLabel, Button } from '@mui/material';
 export default function Login() {
     const [email, setEmail] = useState('user1');
     const [password, setPassword] = useState('');
+    const [name, setName] = useState("User")
     //dong nay de luu thong tin dang nhap
 
     const handleLogin = () => {

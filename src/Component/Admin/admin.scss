@@ -1,0 +1,85 @@
+.category-container {
+    width: 1200px;
+    margin: auto;
+    display: flex;
+    > span {
+        margin-top: 28px;
+        margin-right: 10px;
+    }
+}
+.category-content {
+    width: 1200px;
+    margin: auto;
+    font-size: 20px;
+    > .category-type {
+        width: 100%;
+        > label {
+            margin: 20px 20px 5px;
+        }
+        > input {
+            width: 400px;
+            display: block;
+            font-size: 20px;
+            padding: 8px 16px;
+            border-radius: 5px;
+            border: 1px solid gray;
+            margin: 0 20px 20px;
+            > &:focus {
+                border: 1px solid blue;
+            }
+        }
+        > button {
+            cursor: pointer;
+            margin-left: 20px;
+            font-size: 24px;
+            padding: 8px 24px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgb(139, 139, 139);
+            &:hover {
+                background-color: rgb(109, 109, 109);
+            }
+        }
+    }
+    .category-list {
+        width: 1000px;
+        margin: 30px auto;
+        padding: 20px;
+        min-height: 200px;
+        background-color: rgb(181, 250, 172);
+        > table > thead > tr {
+            text-align: left;
+            > th {
+                padding: 10px 20px;
+                font-size: 24px;
+            }
+            > th:nth-child(1) {
+                min-width: 50px;
+            }
+            > th:nth-child(2) {
+                min-width: 250px;
+            }
+            > th:nth-child(3) {
+                min-width: 450px;
+            }
+        }
+        > table > tbody > tr {
+            text-align: left;
+            transition: 0.2s ease;
+            &:hover {
+                background-color: rgb(182, 182, 182);
+            }
+            > td {
+                padding: 10px 20px;
+                font-size: 20px;
+            }
+            > td:nth-child(4) {
+                text-align: center;
+            }
+        }
+    }
+    > h1 {
+        margin-left: 100px;
+        margin-bottom: -15px;
+    }
+}

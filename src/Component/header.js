@@ -50,26 +50,27 @@ export default function Headers(props) {
     const [products, setProduct] = useState([]);
     const [carts, setCart] = useState([]);
     var username = "";
-    useEffect(() => {
-        if (token) {
-            username = token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]
+    // useEffect(() => {
+    //     var token = loginCheck();
+    //     if (token) {
+    //         username = token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]
 
-            fetch(`https://thebookstore.azurewebsites.net/api/Cart/username`, {
-                method: 'get',
-                headers: { username },
-            })
-                .then((res) => res.json())
-                .then((json) => {
-                    setCart(json);
-                });
-        }
+    //         fetch(`https://thebookstore.azurewebsites.net/api/Cart/username`, {
+    //             method: 'get',
+    //             headers: { username },
+    //         })
+    //             .then((res) => res.json())
+    //             .then((json) => {
+    //                 setCart(json);
+    //             });
+    //     }
 
-        fetch('https://thebookstore.azurewebsites.net/api/Products')
-            .then((res) => res.json())
-            .then((json) => {
-                setProduct(json);
-            });
-    }, []);
+    //     fetch('https://thebookstore.azurewebsites.net/api/Products')
+    //         .then((res) => res.json())
+    //         .then((json) => {
+    //             setProduct(json);
+    //         });
+    // }, []);
     const getProductById = (id) => {
         return products.filter((e) => e.id == id);
     };

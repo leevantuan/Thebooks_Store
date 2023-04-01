@@ -49,6 +49,8 @@ import { json } from 'react-router-dom';
 export default function Headers(props) {
     const [products, setProduct] = useState([]);
     const [carts, setCart] = useState([]);
+
+    var token = loginCheck()
     var username = "";
     useEffect(() => {
         if (token) {

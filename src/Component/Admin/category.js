@@ -2,10 +2,6 @@ import styles from '../component.module.scss'
 import { FaAngleRight } from "react-icons/fa";
 import clsx from 'clsx';
 import { useState, useEffect } from 'react';
-import loginCheck from '../Authen/loginCheck';
-
-
-
 
 export default function Category() {
   const [cateList, setCateList] = useState([])

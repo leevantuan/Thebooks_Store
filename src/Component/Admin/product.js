@@ -1,8 +1,26 @@
 import styles from '../component.module.scss'
 import { FaAngleRight } from "react-icons/fa";
-import clsx from 'clsx';
+import { useEffect, useState } from 'react';
 
 export default function Product() {
+    const [cateList, setCateList] = useState([])
+    const [products, setProduct] = useState([]);
+    useEffect(() => {
+        fetch('https://thebookstore.azurewebsites.net/api/Category')
+            .then((res) => res.json())
+            .then((json) => {
+                setCateList(json);
+            });
+    }, []);
+
+
+    useEffect(() => {
+        fetch('https://thebookstore.azurewebsites.net/api/Products')
+            .then((res) => res.json())
+            .then((json) => {
+                setProduct(json);
+            });
+    }, []);
     return (
         <>
             <div className={styles.pdTitle}>
@@ -16,15 +34,15 @@ export default function Product() {
                 </div>
 
                 <div className={styles.productItem}>
-                    <label >Discription : </label>
-                    <input placeholder='Discription ...' required />
+                    <label >Description : </label>
+                    <input placeholder='Description ...' required />
                 </div>
 
                 <div className={styles.productItem}>
                     <label >Category : </label>
                     <select>
                         <option disabled={true} >Choose Category</option>
-                        {/* {lists.map((e) => <option>{e.nameTl}</option>)} */}
+                        {cateList.map((e) => <option>{e.name}</option>)}
                     </select>
                 </div>
 
@@ -40,6 +58,44 @@ export default function Product() {
 
                 <button className={styles.pdAddBtn}>Sumit</button>
             </form>
+
+            <ol className={styles.tlAdmin} >
+                <table className={styles.pdCateTable}>
+
+                    <thead >
+                        <tr>
+                            <th>Id</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Author</th>
+                            <th>Quantity</th>
+                            <th>ImageUrl</th>
+                            <th>Category</th>
+                        </tr>
+
+                    </thead>
+                    <tbody >
+                        {products.map(e =>
+                            <tr key={e.id}>
+                                <th>{e.id}</th>
+                                <th>{e.Name}</th>
+                                <th>{e.description}</th>
+                                <th>{e.Price}</th>
+                                <th>{e.Author}</th>
+                                <th>{e.Quantity}</th>
+                                <th>{e.ImgUrl}</th>
+                                <th>{e.Category}</th>
+                                <td>
+                                    <button
+                                        onClick={() => { }}
+                                    >X
+                                    </button></td>
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
+            </ol>
         </>
     )
 

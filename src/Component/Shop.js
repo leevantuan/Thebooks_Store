@@ -8,14 +8,13 @@ import ProductItem from './productItem';
 
 export default function Shop() {
     const [products, setProduct] = useState([]);
+    var token = JSON.parse(localStorage.getItem('token'))["accesstoken"];
     useEffect(() => {
         fetch('https://thebookstore.azurewebsites.net/api/Products')
             .then((res) => res.json())
             .then((json) => {
                 setProduct(json);
             });
-        const btn = Array.from(document.getElementsByClassName('btn_cart'));
-        btn.forEach(function (button, index) { });
     }, []);
 
     const handleFT = (e) => {

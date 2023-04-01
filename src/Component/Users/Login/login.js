@@ -1,8 +1,6 @@
 import { React, useState } from 'react';
-import styles from './component.module.scss';
-import loginCheck from './Authen/loginCheck.js'
-
-// import clsx from 'clsx';
+import styles from './login.module.scss'
+import loginCheck from '../../Authen/loginCheck.js'
 
 import { FaUserCheck } from 'react-icons/fa';
 import { FaUnlockAlt } from 'react-icons/fa';
@@ -125,6 +123,7 @@ export default function Login() {
                     </div>
                 </form>
             </div>
+
 
             {/* pasge2 */}
 

@@ -1,12 +1,11 @@
 import React from "react";
-import styles from './Component/component.module.scss'
-import Headers from "./Component/header";
-
+import './index.css'
+import Index from "./Component/Router";
 function App() {
 
   return (
-    <div className={styles.bgApp}>
-      <Headers />
+    <div className='bgApp'>
+      <Index />
     </div>
   );
 }

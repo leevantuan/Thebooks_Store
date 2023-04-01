@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import clsx from 'clsx';
-import { json } from 'react-router-dom';
-import './index.scss'
-
+//Icons
 import { FaRegHeart } from 'react-icons/fa';
+// import { FaRegUserCircle } from "react-icons/fa";
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { AiOutlineEnvironment } from 'react-icons/ai';
 import { AiOutlinePhone } from 'react-icons/ai';
@@ -15,12 +14,13 @@ import { FaYoutube } from 'react-icons/fa';
 import { FaInstagram } from 'react-icons/fa';
 import { FaLinkedin } from 'react-icons/fa';
 import { FaPhoneSquareAlt } from 'react-icons/fa';
-import { FaUser } from 'react-icons/fa';
-import { FaSignOutAlt } from 'react-icons/fa';
-import { FaRegSun } from 'react-icons/fa';
+
+//-------------avatar
 import Avatar from '@mui/material/Avatar';
 import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
+
+//----------------------
 import Box from '@mui/material/Box';
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
@@ -28,49 +28,50 @@ import SpeedDialAction from '@mui/material/SpeedDialAction';
 import ShareIcon from '@mui/icons-material/Share';
 
 //-----------------------------------
-import CartProduct from '../Users/Cart/Item/cartproduct';
-import Login from '../Users/Login/login';
-import Home from '../Users/Home/home';
-import Shop from '../Users/Shop/Shop';
-import Description from '../Users/Shop/Description/descriptionItem'
 
-import Category from '../Admin/category';
-import Product from '../Admin/product';
-import CartView from '../Users/Cart/CartView';
+import Home from './home';
+import Login from './login';
+import Category from './Admin/category';
+import Product from './Admin/product';
+import Shop from './Shop';
+// import SignUp from './SignUp'
+import styles from './component.module.scss';
+import CartView from './CartView';
+import Description from './descriptionItem';
+import loginCheck from './Authen/loginCheck';
 
-// import Shop from './Shop';
-// // import SignUp from './SignUp'
-// import Description from './descriptionItem';
-import loginCheck from '../Authen/loginCheck';
+import './shop.scss';
 
-// import ProductItem from './productItem';
+import CartProduct from './cartproduct';
+import ProductItem from './productItem';
+import { json } from 'react-router-dom';
 
-export default function Index(props) {
+export default function Headers(props) {
     const [products, setProduct] = useState([]);
     const [carts, setCart] = useState([]);
 
-    // var token = loginCheck()
-    // var username = "";
-    // useEffect(() => {
-    //     if (token) {
-    //         username = token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]
+    var token = loginCheck()
+    var username = "";
+    useEffect(() => {
+        if (token) {
+            username = token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]
 
-    //         fetch(`https://thebookstore.azurewebsites.net/api/Cart/username`, {
-    //             method: 'get',
-    //             headers: { username },
-    //         })
-    //             .then((res) => res.json())
-    //             .then((json) => {
-    //                 setCart(json);
-    //             });
-    //     }
+            fetch(`https://thebookstore.azurewebsites.net/api/Cart/username`, {
+                method: 'get',
+                headers: { username },
+            })
+                .then((res) => res.json())
+                .then((json) => {
+                    setCart(json);
+                });
+        }
 
-    //     fetch('https://thebookstore.azurewebsites.net/api/Products')
-    //         .then((res) => res.json())
-    //         .then((json) => {
-    //             setProduct(json);
-    //         });
-    // }, []);
+        fetch('https://thebookstore.azurewebsites.net/api/Products')
+            .then((res) => res.json())
+            .then((json) => {
+                setProduct(json);
+            });
+    }, []);
     const getProductById = (id) => {
         return products.filter((e) => e.id == id);
     };
@@ -105,35 +106,32 @@ export default function Index(props) {
 
     const [search, setSearch] = useState('');
     const [showCart, setShowCart] = useState(false);
-    const [showProfile, setShowProfile] = useState(false);
 
     return (
-        <div className="Container">
-            <div className='Shadow'>
-                <div className='HdContainer'>
-                    <ul className='header'>
-                        <li className='hdLogo'>
+        <div className={styles.Container}>
+            <div className={styles.Shadow}>
+                <div className={styles.HdContainer}>
+                    <ul className={styles.header}>
+                        <li className={styles.hdLogo}>
                             The<span style={{ color: 'orange' }}>Books</span>
                         </li>
-                        <li className='hdSearch'>
+                        <li className={styles.hdSearch}>
                             <input
-                                className='hdInput'
+                                className={styles.hdInput}
                                 placeholder="Search Books Here ..."
                                 onChange={(e) => setSearch(e.target.value)}
                             />
-                            <button className='btnSearch'>Search</button>
+                            <button className={styles.btnSearch}>Search</button>
                         </li>
-                        <li className='hdUser'>
-                            <FaRegHeart className='hdIcons' />
+                        <li className={styles.hdUser}>
+                            <FaRegHeart className={styles.hdIcons} />
                             <AiOutlineShoppingCart
-                                className='hdIcons'
+                                className={styles.hdIcons}
                                 onClick={() => {
                                     setShowCart(!showCart);
                                 }}
                             />
-                            <button onClick={() => {
-                                setShowProfile(!showProfile);
-                            }} className='User'>
+                            <Link to="/Login" className={styles.User}>
                                 {/* mui----------------------------------------------  */}
 
                                 <StyledBadge
@@ -146,39 +144,39 @@ export default function Index(props) {
                                 {/* mui----------------------------------------------  */}
 
                                 {/* User Name */}
-                                <p style={{ color: '#1c0083', fontWeight: 'bold' }} >Login</p>
-                            </button>
+                                <p style={{ color: '#1c0083', fontWeight: 'bold' }}>{Login.name}</p>
+                            </Link>
                         </li>
                     </ul>
                 </div>
 
-                <ul className='header'>
+                <ul className={styles.header}>
                     <li>
-                        <ul className='navigation'>
-                            <li className='styleNav'>
-                                <Link className='link' to="/">
+                        <ul className={styles.navigation}>
+                            <li className={styles.styleNav}>
+                                <Link className={styles.link} to="/">
                                     Home
                                 </Link>
                             </li>
-                            <li className='styleNav'>
-                                <Link className='link' to="/shop">
+                            <li className={styles.styleNav}>
+                                <Link className={styles.link} to="/shop">
                                     Shop
                                 </Link>
                             </li>
-                            <li className='styleNav'>
-                                <Link className='link' to="/">
+                            <li className={styles.styleNav}>
+                                <Link className={styles.link} to="/">
                                     About Us
                                 </Link>
                             </li>
-                            <li className='styleNav'>
-                                <Link className='link' to="/">
+                            <li className={styles.styleNav}>
+                                <Link className={styles.link} to="/">
                                     Contact
                                 </Link>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <button className='btnTouch'>Get in Touch</button>
+                        <button className={styles.btnTouch}>Get in Touch</button>
                     </li>
                 </ul>
             </div>
@@ -211,7 +209,7 @@ export default function Index(props) {
                     </form>
                     <div className="total">
                         <p>
-                            <Link className='link' to="/cart">
+                            <Link className={styles.link} to="/cart">
                                 View Cart
                             </Link>
                         </p>
@@ -220,23 +218,14 @@ export default function Index(props) {
                     </div>
                 </div>
             </div>
-
-
-            <div className="profile-container" hidden={showProfile ? false : true} onClick={() => setShowProfile(!showProfile)}>
-                <ul className="Profile">
-                    <li><Link to="/"><i><FaRegSun style={{ marginRight: 10 }} /></i>Setting</Link></li>
-                    <li><Link to="/"><i><FaUser style={{ marginRight: 10 }} /></i>My Profile</Link></li>
-                    <li><Link to="/"><i><FaSignOutAlt style={{ marginRight: 10 }} /></i>LogOut</Link></li>
-                </ul>
-            </div>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/Login" element={<Login />} />
                 <Route path="/admin/category" element={<Category />} />
                 <Route path="/admin/product" element={<Product />} />
+                <Route path="/Login" element={<Login />} />
                 <Route path="/shop" element={<Shop />} />
-                <Route path="/description" element={<Description />} />
                 <Route path="/cart" element={<CartView />} />
+                <Route path="/description" element={<Description />} />
             </Routes>
 
             {/* Footer */}
@@ -263,181 +252,181 @@ export default function Index(props) {
                 </SpeedDial>
             </Box>
 
-            <div className='ftMain'>
-                <ul className='ftContainer'>
-                    <li >
-                        <h3 className='hdLogo'>
+            <div className={styles.ftMain}>
+                <ul className={styles.ftContainer}>
+                    <li className={styles.mxh}>
+                        <h3 className={styles.hdLogo}>
                             The<span style={{ color: 'orange' }}>Books</span>
                         </h3>
-                        <p className='textRbt'>
+                        <p className={styles.textRbt}>
                             TheBooks is a Book Store <br /> Ecommerce Website Template by <br /> DexignZone lorem ipsum
                             dolor sit.
                         </p>
-                        <ul className='dsFlex ltStyle '>
+                        <ul className={clsx(styles.dsFlex, styles.ltStyle)}>
                             <li>
-                                <a className='ftIcons_cl1' href="/">
+                                <a className={styles.ftIcons_cl1} href="/">
                                     <FaFacebookF />
                                 </a>
                             </li>
                             <li>
-                                <a className='ftIcons_cl1' href="/">
+                                <a className={styles.ftIcons_cl1} href="/">
                                     <FaYoutube />
                                 </a>
                             </li>
                             <li>
-                                <a className='ftIcons_cl1' href="/">
+                                <a className={styles.ftIcons_cl1} href="/">
                                     <FaLinkedin />
                                 </a>
                             </li>
                             <li>
-                                <a className='ftIcons_cl1' href="/">
+                                <a className={styles.ftIcons_cl1} href="/">
                                     <FaInstagram />
                                 </a>
                             </li>
                         </ul>
                     </li>
 
-                    <li >
-                        <h4 className='titleFt'>Our Links</h4>
-                        <div className='dsFlex'>
-                            <div className='titleFt_icons'>
+                    <li className={styles.ourLinks}>
+                        <h4 className={styles.titleFt}>Our Links</h4>
+                        <div className={styles.dsFlex}>
+                            <div className={styles.titleFt_icons}>
                                 <FaAngleRight />
                             </div>
-                            <p className='titleFt_text'>About Us</p>
+                            <p className={styles.titleFt_text}>About Us</p>
                         </div>
 
-                        <div className='margin50 dsFlex'>
-                            <div className='titleFt_icons'>
+                        <div className={clsx(styles.dsFlex, styles.margin50)}>
+                            <div className={styles.titleFt_icons}>
                                 <FaAngleRight />
                             </div>
-                            <p className='titleFt_text'>Contact US</p>
+                            <p className={styles.titleFt_text}>Contact US</p>
                         </div>
 
-                        <div className='margin50 dsFlex'>
-                            <div className='titleFt_icons'>
+                        <div className={clsx(styles.dsFlex, styles.margin50)}>
+                            <div className={styles.titleFt_icons}>
                                 <FaAngleRight />
                             </div>
-                            <p className='titleFt_text'>Privacy Policy</p>
+                            <p className={styles.titleFt_text}>Privacy Policy</p>
                         </div>
 
-                        <div className='margin50 dsFlex'>
-                            <div className='titleFt_icons'>
+                        <div className={clsx(styles.dsFlex, styles.margin50)}>
+                            <div className={styles.titleFt_icons}>
                                 <FaAngleRight />
                             </div>
-                            <p className='titleFt_text'>Pricing Table</p>
+                            <p className={styles.titleFt_text}>Pricing Table</p>
                         </div>
 
-                        <div className='margin50 dsFlex'>
-                            <div className='titleFt_icons'>
+                        <div className={clsx(styles.dsFlex, styles.margin50)}>
+                            <div className={styles.titleFt_icons}>
                                 <FaAngleRight />
                             </div>
-                            <p className='titleFt_text'>FAQ</p>
-                        </div>
-                    </li>
-
-                    <li>
-                        <h4 className='titleFt'>The Books ? </h4>
-
-                        <div className='margin50 dsFlex'>
-                            <div className='titleFt_icons'>
-                                <FaAngleRight />
-                            </div>
-                            <p className='titleFt_text'>The Books</p>
-                        </div>
-
-                        <div className='margin50 dsFlex'>
-                            <div className='titleFt_icons'>
-                                <FaAngleRight />
-                            </div>
-                            <p className='titleFt_text'>Services</p>
-                        </div>
-
-                        <div className='margin50 dsFlex'>
-                            <div className='titleFt_icons'>
-                                <FaAngleRight />
-                            </div>
-                            <p className='titleFt_text'>Book Details</p>
-                        </div>
-
-                        <div className='margin50 dsFlex'>
-                            <div className='titleFt_icons'>
-                                <FaAngleRight />
-                            </div>
-                            <p className='titleFt_text'>Blog Details</p>
-                        </div>
-
-                        <div className='margin50 dsFlex'>
-                            <div className='titleFt_icons'>
-                                <FaAngleRight />
-                            </div>
-                            <p className='titleFt_text'>Shop</p>
+                            <p className={styles.titleFt_text}>FAQ</p>
                         </div>
                     </li>
 
                     <li>
-                        <h4 className='titleFt'>Resources</h4>
-                        <div className='margin50 dsFlex'>
-                            <div className='titleFt_icons'>
+                        <h4 className={styles.titleFt}>The Books ? </h4>
+
+                        <div className={clsx(styles.dsFlex, styles.margin50)}>
+                            <div className={styles.titleFt_icons}>
                                 <FaAngleRight />
                             </div>
-                            <p className='titleFt_text'>Download</p>
+                            <p className={styles.titleFt_text}>The Books</p>
                         </div>
 
-                        <div className='margin50 dsFlex'>
-                            <div className='titleFt_icons'>
+                        <div className={clsx(styles.dsFlex, styles.margin50)}>
+                            <div className={styles.titleFt_icons}>
                                 <FaAngleRight />
                             </div>
-                            <p className='titleFt_text'>Help Center</p>
+                            <p className={styles.titleFt_text}>Services</p>
                         </div>
 
-                        <div className='margin50 dsFlex'>
-                            <div className='titleFt_icons'>
+                        <div className={clsx(styles.dsFlex, styles.margin50)}>
+                            <div className={styles.titleFt_icons}>
                                 <FaAngleRight />
                             </div>
-                            <p className='titleFt_text'>Shop Carts</p>
+                            <p className={styles.titleFt_text}>Book Details</p>
                         </div>
 
-                        <div className='margin50 dsFlex'>
-                            <div className='titleFt_icons'>
+                        <div className={clsx(styles.dsFlex, styles.margin50)}>
+                            <div className={styles.titleFt_icons}>
                                 <FaAngleRight />
                             </div>
-                            <p className='titleFt_text'>Login</p>
+                            <p className={styles.titleFt_text}>Blog Details</p>
                         </div>
 
-                        <div className='margin50 dsFlex'>
-                            <div className='titleFt_icons'>
+                        <div className={clsx(styles.dsFlex, styles.margin50)}>
+                            <div className={styles.titleFt_icons}>
                                 <FaAngleRight />
                             </div>
-                            <p className='titleFt_text'>Partner</p>
+                            <p className={styles.titleFt_text}>Shop</p>
                         </div>
                     </li>
 
                     <li>
-                        <h4 className='titleFt'>Get in Touch With Us</h4>
+                        <h4 className={styles.titleFt}>Resources</h4>
+                        <div className={clsx(styles.dsFlex, styles.margin50)}>
+                            <div className={styles.titleFt_icons}>
+                                <FaAngleRight />
+                            </div>
+                            <p className={styles.titleFt_text}>Download</p>
+                        </div>
 
-                        <div className='withUS dsFlex'>
-                            <div className='withUs_icons'>
+                        <div className={clsx(styles.dsFlex, styles.margin50)}>
+                            <div className={styles.titleFt_icons}>
+                                <FaAngleRight />
+                            </div>
+                            <p className={styles.titleFt_text}>Help Center</p>
+                        </div>
+
+                        <div className={clsx(styles.dsFlex, styles.margin50)}>
+                            <div className={styles.titleFt_icons}>
+                                <FaAngleRight />
+                            </div>
+                            <p className={styles.titleFt_text}>Shop Carts</p>
+                        </div>
+
+                        <div className={clsx(styles.dsFlex, styles.margin50)}>
+                            <div className={styles.titleFt_icons}>
+                                <FaAngleRight />
+                            </div>
+                            <p className={styles.titleFt_text}>Login</p>
+                        </div>
+
+                        <div className={clsx(styles.dsFlex, styles.margin50)}>
+                            <div className={styles.titleFt_icons}>
+                                <FaAngleRight />
+                            </div>
+                            <p className={styles.titleFt_text}>Partner</p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <h4 className={styles.titleFt}>Get in Touch With Us</h4>
+
+                        <div className={clsx(styles.dsFlex, styles.withUS)}>
+                            <div className={styles.withUs_icons}>
                                 <AiOutlineEnvironment />
                             </div>
-                            <p className='withUs_text'>
+                            <p className={styles.withUs_text}>
                                 Trảng Dài, Biên Hòa, <br /> Đồng Nai, Việt Nam
                             </p>
                         </div>
 
-                        <div className='withUS dsFlex'>
-                            <div className='withUs_icons'>
+                        <div className={clsx(styles.dsFlex, styles.withUS)}>
+                            <div className={styles.withUs_icons}>
                                 <AiOutlinePhone />
                             </div>
-                            <p className='withUs_text'>
+                            <p className={styles.withUs_text}>
                                 +84 817 251 666 <br /> +84 817 251 222
                             </p>
                         </div>
 
-                        <div className='withUS dsFlex'>
-                            <div className='withUs_icons'>
+                        <div className={clsx(styles.dsFlex, styles.withUS)}>
+                            <div className={styles.withUs_icons}>
                                 <AiOutlineMail />
                             </div>
-                            <p className='withUs_text'>
+                            <p className={styles.withUs_text}>
                                 thebooks@gmail.com <br /> support@thebooks.id
                             </p>
                         </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaStar } from 'react-icons/fa';
-import Page2Slider from './page2Slider';
+import SliderTwo from '../../Home/Carousel/SliderTwo';
 import './description.scss';
 
 export default function Description(props) {
@@ -8,7 +8,7 @@ export default function Description(props) {
         <div className="description-container">
             <div className="description-content">
                 <div className="content-left">
-                    <img src={require('../assets/product2.jpg')} alt="product" />
+                    <img src={require('../../../../assets/product1.jpg')} alt="product" />
                 </div>
                 <div className="content-right">
                     <h2>
@@ -51,7 +51,7 @@ export default function Description(props) {
             {/* ----------------------------------------- */}
             <div className="custom-page2">
                 <p></p>
-                <Page2Slider />
+                <SliderTwo />
             </div>
         </div>
     );

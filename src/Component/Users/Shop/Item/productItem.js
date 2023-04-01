@@ -28,7 +28,7 @@ export default function ProductItem(props) {
             <h1>
                 <p>${props.price}</p>
             </h1>
-            <button className="btn_cart">Add to cart</button>
+            {/* <button className="btn_cart">Add to cart</button> */}
             <div>
                 <i>
                     <FaRegHeart />

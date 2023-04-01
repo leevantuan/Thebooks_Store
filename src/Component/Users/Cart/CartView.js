@@ -3,8 +3,8 @@ import './cart.scss';
 import { FaStar } from 'react-icons/fa';
 import { FaRegHeart } from 'react-icons/fa';
 import { duration } from '@material-ui/core';
-import CartProduct from './cartproduct';
-import ProductItem from './productItem';
+import CartProduct from './Item/cartproduct';
+import ProductItem from '../Shop/Item/productItem';
 import { json } from 'react-router-dom';
 
 const username = 'user@example.com';
@@ -32,7 +32,7 @@ export default function CartView() {
 
         console.log(getProductById(28));
         const btn = Array.from(document.getElementsByClassName('btn_cart'));
-        btn.forEach(function (button, index) {});
+        btn.forEach(function (button, index) { });
     }, []);
     const getProductById = (id) => {
         return products.filter((e) => e.id == id);
@@ -87,11 +87,11 @@ export default function CartView() {
                             <div className="name-cart">
                                 <div className="i-pay">
                                     <input type="checkbox" />
-                                    <img src={require('../assets/ipay-card.png')} alt="product" />
+                                    <img src={require('../../../assets/ipay-card.png')} alt="product" />
                                 </div>
                                 <div className="visa">
                                     <input type="checkbox" />
-                                    <img src={require('../assets/visa.png')} alt="product" />
+                                    <img src={require('../../../assets/visa.png')} alt="product" />
                                 </div>
                             </div>
                             <div className="cart-number">

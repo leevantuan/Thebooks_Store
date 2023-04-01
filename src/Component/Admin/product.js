@@ -1,4 +1,4 @@
-import styles from '../component.module.scss'
+import './admin.scss'
 import { FaAngleRight } from "react-icons/fa";
 import { useEffect, useState } from 'react';
 
@@ -23,44 +23,48 @@ export default function Product() {
     }, []);
     return (
         <>
-            <div className={styles.pdTitle}>
-                <span className={styles.pdTitle_icons}><FaAngleRight /></span>
-                <h2 className={styles.pdTitle_text}>Thêm Sản Phẩm</h2>
+            <div className='product-container'>
+                <span>Thêm Sản Phẩm</span>
             </div>
-            <form className={styles.pdAdd}>
-                <div className={styles.productItem}>
-                    <label >Title : </label>
-                    <input placeholder='Title ...' required />
+            <form className='form-add'>
+                <div className='form-input-product'>
+                    <div className='form-item'>
+                        <label >Title : </label>
+                        <input placeholder='Title ...' required />
+                    </div>
+                    <div className='form-item'>
+                        <label >Category : </label>
+                        <select>
+                            <option disabled={true} >Choose Category</option>
+                            {cateList.map((e) => <option>{e.name}</option>)}
+                        </select>
+                    </div>
+
                 </div>
 
-                <div className={styles.productItem}>
-                    <label >Description : </label>
-                    <input placeholder='Description ...' required />
+                <div className='form-input-product'>
+                    <div className='form-item'>
+                        <label >Description : </label>
+                        <input placeholder='Description ...' required />
+                    </div>
+                    <div className='form-input-price'>
+                        <div className='form-price'>
+                            <label >Price : </label>
+                            <input placeholder='Price ...' required />
+                        </div>
+
+                        <div className='form-price'>
+                            <label >Quantity : </label>
+                            <input placeholder='Quantity ...' required />
+                        </div>
+                    </div>
                 </div>
 
-                <div className={styles.productItem}>
-                    <label >Category : </label>
-                    <select>
-                        <option disabled={true} >Choose Category</option>
-                        {cateList.map((e) => <option>{e.name}</option>)}
-                    </select>
-                </div>
-
-                <div className={styles.productItem}>
-                    <label >Price : </label>
-                    <input placeholder='Price ...' required />
-                </div>
-
-                <div className={styles.productItem}>
-                    <label >Quantity : </label>
-                    <input placeholder='Quantity ...' required />
-                </div>
-
-                <button className={styles.pdAddBtn}>Sumit</button>
+                <button className='form-btn'>Submit</button>
             </form>
 
-            <ol className={styles.tlAdmin} >
-                <table className={styles.pdCateTable}>
+            <ol className='product-list' >
+                <table>
 
                     <thead >
                         <tr>
@@ -72,20 +76,21 @@ export default function Product() {
                             <th>Quantity</th>
                             <th>ImageUrl</th>
                             <th>Category</th>
+                            <th>Action</th>
                         </tr>
 
                     </thead>
                     <tbody >
                         {products.map(e =>
                             <tr key={e.id}>
-                                <th>{e.id}</th>
-                                <th>{e.Name}</th>
-                                <th>{e.description}</th>
-                                <th>{e.Price}</th>
-                                <th>{e.Author}</th>
-                                <th>{e.Quantity}</th>
-                                <th>{e.ImgUrl}</th>
-                                <th>{e.Category}</th>
+                                <td>{e.id}</td>
+                                <td>{e.Name}</td>
+                                <td>{e.description}</td>
+                                <td>{e.Price}</td>
+                                <td>{e.Author}</td>
+                                <td>{e.Quantity}</td>
+                                <td>{e.ImgUrl}</td>
+                                <td>{e.Category}</td>
                                 <td>
                                     <button
                                         onClick={() => { }}

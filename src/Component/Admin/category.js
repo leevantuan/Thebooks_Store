@@ -1,7 +1,14 @@
-import styles from '../component.module.scss'
 import { FaAngleRight } from "react-icons/fa";
 import clsx from 'clsx';
 import { useState, useEffect } from 'react';
+// <<<<<<< HEAD
+import loginCheck from '../Authen/loginCheck';
+import './admin.scss'
+
+
+
+// =======
+// >>>>>>> f8e72d9ca2654f9018b9d6732e22de464bf18188
 
 export default function Category() {
   const [cateList, setCateList] = useState([])
@@ -67,34 +74,35 @@ export default function Category() {
 
   return (
     <>
-      <div className={styles.pdTitle}>
-        <span className={styles.pdTitle_icons}><FaAngleRight /></span>
-        <h2 className={styles.pdTitle_text}>Thể Loại</h2>
+      <div className='category-container'>
+        <span><FaAngleRight /></span>
+        <h2>Thể Loại</h2>
       </div>
 
 
 
-      <div className={styles.pdContainer}>
-
-        <div className={clsx(styles.type, styles.dsFlex)}>
-          <label>Thể Loại</label>
+      <div className='category-content'>
+        <div className='category-type'>
+          <label>Category</label>
           <input
             onChange={(e) => { setName(e.target.value) }}
             placeholder='Category name ... '
             required />
+          <label>Description</label>
           <input
             onChange={(e) => { setDescription(e.target.value) }}
             placeholder='Description ... '
             required />
           <button
-            onClick={() => AddCategory()}
-            className={styles.btnTL_admin} >Add</button>
+            onClick={() => AddCategory()}>Add</button>
         </div>
-        <ol className={styles.tlAdmin} >
-          <table className={styles.pdCateTable}>
+        <h1>List Description</h1>
+        <ol className='category-list' >
+          <table>
 
             <thead >
-              <tr><th>Id</th>
+              <tr>
+                <th>Id</th>
                 <th>Title</th>
                 <th>Description</th>
                 <th>Action</th>

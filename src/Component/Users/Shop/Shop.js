@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './shop.scss';
 
 import { FaBars } from 'react-icons/fa';
-
-import ProductItem from './productItem';
+import ProductItem from './Item/productItem';
 
 
 export default function Shop() {

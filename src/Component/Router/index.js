@@ -37,12 +37,14 @@ import Description from '../Users/Shop/Description/descriptionItem'
 import Category from '../Admin/category';
 import Product from '../Admin/product';
 import CartView from '../Users/Cart/CartView';
-import { loginEmailSelector } from '../../redux/Selector';
 import LoginProfile from '../Users/Login/loginProfile';
+import Profile from '../Users/Profile/profile';
+import Contact from '../Users/Contact/contact';
 
 // import Shop from './Shop';
 // // import SignUp from './SignUp'
 // import Description from './descriptionItem';
+import { loginEmailSelector } from '../../redux/Selector';
 import loginCheck from '../Authen/loginCheck';
 import { useSelector } from 'react-redux';
 // import ProductItem from './productItem';
@@ -187,7 +189,7 @@ export default function Index(props) {
                                 </Link>
                             </li>
                             <li className='styleNav'>
-                                <Link className='link' to="/">
+                                <Link className='link' to="/contact">
                                     Contact
                                 </Link>
                             </li>
@@ -241,7 +243,7 @@ export default function Index(props) {
             <div className="profile-container" hidden={showProfile ? false : true} onClick={() => setShowProfile(!showProfile)}>
                 <ul className="Profile">
                     <li><Link to="/"><i><FaRegSun style={{ marginRight: 10 }} /></i>Setting</Link></li>
-                    <li><Link to="/"><i><FaUser style={{ marginRight: 10 }} /></i>My Profile</Link></li>
+                    <li><Link to="/profile"><i><FaUser style={{ marginRight: 10 }} /></i>My Profile</Link></li>
                     <li><Link onClick={() => handleLogout()} to="/"><i><FaSignOutAlt style={{ marginRight: 10 }} /></i>LogOut</Link></li>
                 </ul>
             </div>
@@ -250,6 +252,8 @@ export default function Index(props) {
                 <Route path="/Login" element={<Login />} />
                 <Route path="/admin/category" element={<Category />} />
                 <Route path="/admin/product" element={<Product />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/contact" element={<Contact />} />
                 <Route path="/shop" element={<Shop />} />
                 <Route path="/description" element={<Description />} />
                 <Route path="/cart" element={<CartView />} />

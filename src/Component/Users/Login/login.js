@@ -18,7 +18,7 @@ import { useSelector } from 'react-redux';
 import { loginEmailSelector } from '../../../redux/Selector';
 
 export default function Login() {
-    const [email, setEmail] = useState('user1');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     //dong nay de luu thong tin dang nhap
@@ -72,7 +72,7 @@ export default function Login() {
                             <FaUserCheck />
                         </span>
                         <input
-                            type="text"
+                            type="email"
                             onChange={(e) => {
                                 setEmail(e.target.value);
                             }}
@@ -86,7 +86,7 @@ export default function Login() {
                             <FaUnlockAlt />
                         </span>
                         <input
-                            type="text"
+                            type="password"
                             onChange={(e) => {
                                 setPassword(e.target.value);
                             }}
@@ -100,6 +100,7 @@ export default function Login() {
                     </div>
                     <div className={styles.btnLogin}>
                         <Button
+                            type='submit'
                             className={styles.btnClickLogin}
                             onClick={() => {
                                 handleLogin();

@@ -1,0 +1,143 @@
+.myProfile-container {
+    position: relative;
+    width: 900px;
+    min-height: 400px;
+    margin: 50px auto;
+    display: flex;
+    justify-content: space-between;
+    .left-myProfile {
+        margin-top: 10px;
+        width: 200px;
+        .avatar-myProfile {
+            cursor: pointer;
+            display: flex;
+            margin-bottom: 20px;
+            > div {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background-color: green;
+            }
+            > p {
+                font-size: 20px;
+                font-weight: 500;
+                margin-top: 10px;
+                margin-left: 10px;
+            }
+        }
+        > li:nth-child(2),
+        li:nth-child(3) {
+            display: flex;
+            padding: 20px 10px;
+            transition: 0.3 ease;
+            cursor: pointer;
+            &:hover {
+                background-color: rgb(219, 219, 219);
+            }
+            > p {
+                margin: 0 10px;
+            }
+        }
+    }
+    .right-myProfile {
+        width: 680px;
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 2px;
+        box-sizing: border-box;
+        > h2 {
+            margin: 0;
+        }
+        > p {
+            margin: 0;
+        }
+        > hr {
+            margin: 15px auto;
+            height: 0.2px;
+            background-color: #d1d1d1;
+        }
+        .myProfile {
+            .input-myProfile {
+                display: flex;
+                font-size: 20px;
+                margin: 20px;
+                > label {
+                    width: 150px;
+                    text-align: end;
+                }
+                > input {
+                    width: 300px;
+                    margin-left: 30px;
+                    padding: 8px 12px;
+                    box-sizing: border-box;
+                }
+                > p {
+                    margin-left: 30px;
+                    color: rgb(59, 59, 255);
+                    cursor: pointer;
+                    font-size: 12px;
+                    border-bottom: 0.2px solid rgb(59, 59, 255);
+                }
+            }
+            > button {
+                margin-left: 200px;
+                font-size: 20px;
+                font-weight: 500;
+                padding: 8px 20px;
+                border: none;
+                border-radius: 5px;
+                background-color: rgb(161, 161, 161);
+                transition: 0.3 ease;
+                &:hover {
+                    background-color: rgb(108, 108, 255);
+                }
+            }
+        }
+    }
+}
+ul {
+    list-style: none;
+}
+.myCart {
+    position: absolute;
+    top: 0;
+    left: 220px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 2px;
+    min-height: 420px;
+    box-sizing: border-box;
+    > table {
+        border-collapse: collapse;
+    }
+    > table > thead > tr {
+        background-color: #d1d1d1;
+        > th {
+            border: 1px solid #f7f7f7;
+            padding: 8px;
+            text-align: left;
+            width: 100px;
+        }
+        > th:nth-child(1) {
+            width: 300px;
+        }
+    }
+    > table > tbody > tr {
+        cursor: pointer;
+        &:hover {
+            background-color: #d1d1d1;
+        }
+        > td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+    }
+    // > th,
+    // > td {
+    //     border: 1px solid #ddd;
+    // }
+}
+.active {
+    background-color: rgb(172, 172, 172);
+}

@@ -37,20 +37,22 @@ import Description from '../Users/Shop/Description/descriptionItem'
 import Category from '../Admin/category';
 import Product from '../Admin/product';
 import CartView from '../Users/Cart/CartView';
+import { loginEmailSelector } from '../../redux/Selector';
+import LoginProfile from '../Users/Login/loginProfile';
 
 // import Shop from './Shop';
 // // import SignUp from './SignUp'
 // import Description from './descriptionItem';
 import loginCheck from '../Authen/loginCheck';
-
+import { useSelector } from 'react-redux';
 // import ProductItem from './productItem';
 
 export default function Index(props) {
     const [products, setProduct] = useState([]);
     const [carts, setCart] = useState([]);
 
+    // const Email = useSelector(loginEmailSelector)
     // var token = loginCheck()
-    // var username = "";
     // useEffect(() => {
     //     if (token) {
     //         username = token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]
@@ -63,6 +65,9 @@ export default function Index(props) {
     //             .then((json) => {
     //                 setCart(json);
     //             });
+    //     } else {
+    //         username = "Login"
+    //         setCart([])
     //     }
 
     //     fetch('https://thebookstore.azurewebsites.net/api/Products')
@@ -75,6 +80,16 @@ export default function Index(props) {
         return products.filter((e) => e.id == id);
     };
 
+    const handleLogout = () => {
+        // localStorage.removeItem('token')
+        // var token = localStorage.getItem('token');
+        // if (!token) alert('Dang xuat thanh cong!');
+        alert("Dang xuat!")
+    };
+    const handleLoginOnclick = () => {
+        var token = true;
+        if (token) setShowProfile(!showProfile);
+    }
     // mui --------------------------
     const StyledBadge = styled(Badge)(({ theme }) => ({
         '& .MuiBadge-badge': {
@@ -132,7 +147,7 @@ export default function Index(props) {
                                 }}
                             />
                             <button onClick={() => {
-                                setShowProfile(!showProfile);
+                                handleLoginOnclick();
                             }} className='User'>
                                 {/* mui----------------------------------------------  */}
 
@@ -146,7 +161,8 @@ export default function Index(props) {
                                 {/* mui----------------------------------------------  */}
 
                                 {/* User Name */}
-                                <p style={{ color: '#1c0083', fontWeight: 'bold' }} >Login</p>
+
+                                <LoginProfile />
                             </button>
                         </li>
                     </ul>
@@ -226,7 +242,7 @@ export default function Index(props) {
                 <ul className="Profile">
                     <li><Link to="/"><i><FaRegSun style={{ marginRight: 10 }} /></i>Setting</Link></li>
                     <li><Link to="/"><i><FaUser style={{ marginRight: 10 }} /></i>My Profile</Link></li>
-                    <li><Link to="/"><i><FaSignOutAlt style={{ marginRight: 10 }} /></i>LogOut</Link></li>
+                    <li><Link onClick={() => handleLogout()} to="/"><i><FaSignOutAlt style={{ marginRight: 10 }} /></i>LogOut</Link></li>
                 </ul>
             </div>
             <Routes>

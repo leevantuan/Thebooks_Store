@@ -1,0 +1,1 @@
+export const loginEmailSelector = (state) => state.login.email;

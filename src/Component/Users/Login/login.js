@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import styles from './login.module.scss'
 import loginCheck from '../../Authen/loginCheck.js'
 
@@ -10,38 +10,56 @@ import { FaHome } from 'react-icons/fa';
 import { Checkbox } from '@mui/material';
 import { FormControlLabel, Button } from '@mui/material';
 
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { loginEmail } from '../../../redux/Action';
+
+import { useSelector } from 'react-redux';
+import { loginEmailSelector } from '../../../redux/Selector';
+
 export default function Login() {
     const [email, setEmail] = useState('user1');
     const [password, setPassword] = useState('');
-    const [name, setName] = useState("User")
+
     //dong nay de luu thong tin dang nhap
 
-    const handleLogin = () => {
-        fetch('https://thebookstore.azurewebsites.net/api/Authentication/login', {
-            method: 'post',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                email,
-                password,
-            }),
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                console.log(res);
-                //luu thong tin dang nhap vao localstorage
-                localStorage.setItem('token', JSON.stringify(res));
-            });
+    const dispatch = useDispatch()
+
+    const handleLogin = async () => {
+        await axios.post('https://thebookstore.azurewebsites.net/api/Authentication/login', { email, password }, {
+            Body: {
+                'Content-Type': 'application/json'
+            }
+        });
         var token = loginCheck();
         if (token) {
-            alert(`Dang nhap thanh cong! Xin chao ${token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]}`)
-            window.location = '/'
+            alert(`${token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]}`)
+            dispatch(loginEmail((`${token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]}`)))
         }
-    };
-    const handleLogout = () => {
-        // localStorage.removeItem('token')
-        var token = localStorage.getItem('token');
-        if (token) alert('Dang xuat thanh cong!');
-    };
+    }
+    // const handleLogin = () => {
+    //     // fetch('https://thebookstore.azurewebsites.net/api/Authentication/login', {
+    //     //     method: 'post',
+    //     //     headers: { 'Content-Type': 'application/json' },
+    //     //     body: JSON.stringify({
+    //     //         email,
+    //     //         password,
+    //     //     }),
+    //     // })
+    //     //     .then((res) => res.json())
+    //     //     .then((res) => {
+    //     //         console.log(res);
+    //     //         //luu thong tin dang nhap vao localstorage
+    //     //         localStorage.setItem('token', JSON.stringify(res));
+    //     //     });
+
+    //     // var token = loginCheck();
+    //     // if (token) {
+    //     //     alert(`Dang nhap thanh cong! Xin chao ${token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]}`)
+    //     //     // window.location = '/'
+    //     // }
+    // };
+
 
     return (
         <div className={styles.lgContainer}>
@@ -90,16 +108,6 @@ export default function Login() {
                             href="#contained-buttons"
                         >
                             Login
-                        </Button>
-                        <Button
-                            className={styles.btnClickLogin}
-                            onClick={() => {
-                                handleLogout();
-                            }}
-                            variant="contained"
-                            href="#contained-buttons"
-                        >
-                            Logout
                         </Button>
                     </div>
 

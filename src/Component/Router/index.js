@@ -78,18 +78,19 @@ export default function Index(props) {
     //             setProduct(json);
     //         });
     // }, []);
+
+
     const getProductById = (id) => {
         return products.filter((e) => e.id == id);
     };
 
     const handleLogout = () => {
-        // localStorage.removeItem('token')
-        // var token = localStorage.getItem('token');
-        // if (!token) alert('Dang xuat thanh cong!');
-        alert("Dang xuat!")
+        localStorage.removeItem('token')
+        var token = localStorage.getItem('token');
+        if (!token) alert('Dang xuat thanh cong!');
     };
     const handleLoginOnclick = () => {
-        var token = true;
+        var token = localStorage.getItem('token');
         if (token) setShowProfile(!showProfile);
     }
     // mui --------------------------

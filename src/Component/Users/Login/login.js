@@ -11,54 +11,32 @@ import { Checkbox } from '@mui/material';
 import { FormControlLabel, Button } from '@mui/material';
 
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { loginEmail } from '../../../redux/Action';
-
-import { useSelector } from 'react-redux';
-import { loginEmailSelector } from '../../../redux/Selector';
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    //dong nay de luu thong tin dang nhap
+    const handleLogin = () => {
+        fetch('https://localhost:7229/api/Authentication/login', {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                email,
+                password,
+            }),
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                localStorage.setItem('token', JSON.stringify(res));
+                var token = loginCheck();
+                console.log(token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"])
+                if (token) {
+                    alert(`Dang nhap thanh cong! Xin chao ${token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]}`);
+                    window.location = '/'
+                }
+            });
 
-    const dispatch = useDispatch()
-
-    const handleLogin = async () => {
-        await axios.post('https://thebookstore.azurewebsites.net/api/Authentication/login', { email, password }, {
-            Body: {
-                'Content-Type': 'application/json'
-            }
-        });
-        var token = loginCheck();
-        if (token) {
-            alert(`${token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]}`)
-            dispatch(loginEmail((`${token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]}`)))
-        }
-    }
-    // const handleLogin = () => {
-    //     // fetch('https://thebookstore.azurewebsites.net/api/Authentication/login', {
-    //     //     method: 'post',
-    //     //     headers: { 'Content-Type': 'application/json' },
-    //     //     body: JSON.stringify({
-    //     //         email,
-    //     //         password,
-    //     //     }),
-    //     // })
-    //     //     .then((res) => res.json())
-    //     //     .then((res) => {
-    //     //         console.log(res);
-    //     //         //luu thong tin dang nhap vao localstorage
-    //     //         localStorage.setItem('token', JSON.stringify(res));
-    //     //     });
-
-    //     // var token = loginCheck();
-    //     // if (token) {
-    //     //     alert(`Dang nhap thanh cong! Xin chao ${token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]}`)
-    //     //     // window.location = '/'
-    //     // }
-    // };
+    };
 
 
     return (

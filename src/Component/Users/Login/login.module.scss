@@ -76,6 +76,7 @@ ul {
     right: 0;
     font-size: 19px;
 }
+
 .lbLogin {
     position: absolute;
     top: 50%;
@@ -127,4 +128,11 @@ ul {
     margin-left: 620px;
     margin-top: -276px;
     width: 600px;
+}
+.lbPasswordrequired {
+    color:red;
+    font-size: 20;
+    font-style: italic;
+    width: 100%;
+    text-align: center;
 }

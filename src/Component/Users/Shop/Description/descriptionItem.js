@@ -33,7 +33,7 @@ export default function Description(props) {
                             <FaStar />
                         </i>
                     </ul>
-                    <span>$500</span>
+                    <span>{props.id}</span>
                     <p>
                         Look no further than Hippity, Hoppity, Little Bunny for adorable nursery rhyme books. Follow the
                         little bunny rabbit and its adorable bird friends in this finger puppet book as they hunt for

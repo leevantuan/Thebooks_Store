@@ -24,11 +24,12 @@
     transition: 0.3s;
     margin: 20px 5px;
     text-decoration: none;
+    align-items: center;
     > img {
         width: 232px;
         height: 320px;
     }
-    > h2 {
+    > h3 {
         text-align: center;
         color: #00039e;
         cursor: pointer;
@@ -46,7 +47,7 @@
     > ul {
         text-align: center;
         color: #e28903e7;
-        font-size: 20px;
+        font-size: 15px;
         margin-top: -4px;
         transition: 0.3s;
     }
@@ -54,7 +55,7 @@
         position: absolute;
         left: 40%;
         top: 400px;
-        font-size: 24px;
+        font-size: 15px;
         font-weight: 400;
         display: flex;
         color: rgb(255, 77, 77);
@@ -65,7 +66,7 @@
         top: 455px;
         left: 30%;
         padding: 12px;
-        font-size: 20px;
+        font-size: 16px;
         font-weight: 500;
         color: #fff;
         background-color: #00039e;
@@ -95,11 +96,11 @@
     width: 1170px;
     margin: 0 auto;
     padding-top: 20px;
-    font-size: 24px;
+    font-size: 16px;
     font-weight: bold;
     > button {
         display: flex;
-        font-size: 24px;
+        font-size: 16px;
         font-weight: bold;
         margin: 0 !important;
         height: 35px !important;

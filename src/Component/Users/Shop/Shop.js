@@ -7,14 +7,15 @@ import ProductItem from './Item/productItem';
 
 export default function Shop() {
     const [products, setProduct] = useState([]);
-    var token = JSON.parse(localStorage.getItem('token'))["accesstoken"];
+
     useEffect(() => {
-        fetch('https://thebookstore.azurewebsites.net/api/Products')
+        fetch('https://localhost:7229/api/Products')
             .then((res) => res.json())
             .then((json) => {
                 setProduct(json);
             });
     }, []);
+
 
     const handleFT = (e) => {
         const nameFT = e.target.value;
@@ -25,6 +26,7 @@ export default function Shop() {
             alert('none');
         }
     };
+    console.log(products)
     return (
         <div className="container">
             <div className="filter-product">
@@ -74,20 +76,13 @@ export default function Shop() {
                     </li>
                 </ul>
             </div>
-            <div className="title_books">
-                <button>
-                    <p>All</p>
-                    <i>
-                        <FaBars />
-                    </i>
-                </button>
-                <p>BOOKS</p>
-            </div>
+
             <div className="content">
                 {products.map((e) => (
                     <ProductItem
                         key={e.id}
-                        img={'http://localhost:3000/static/media/product.061b9fb8d8537506d31d.jpg'}
+                        id={e.id}
+                        img={e.imageUrl}
                         name={e.title}
                         descriptiom={e.descriptiom}
                         price={e.price}

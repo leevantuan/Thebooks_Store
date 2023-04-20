@@ -146,7 +146,7 @@
     margin: 30px auto;
     padding: 20px;
     min-height: 200px;
-    background-color: rgb(181, 250, 172);
+    background-color: none;
     border-radius: 5px;
     > table > thead > tr {
         font-size: 20px;
@@ -186,4 +186,12 @@
             text-align: center;
         }
     }
+}
+.img-input{
+    margin-left: 15px;
+}
+
+#desinput {
+    height: 100px;
+    width: 430px;
 }

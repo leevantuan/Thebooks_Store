@@ -256,7 +256,7 @@ export default function Index(props) {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/shop" element={<Shop />} />
-                <Route path="/description" element={<Description />} />
+                <Route path="/description/:id" element={<Description />} />
                 <Route path="/cart" element={<CartView />} />
             </Routes>
 

@@ -14,8 +14,10 @@ export default function Category() {
   const [cateList, setCateList] = useState([])
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
+
+
   useEffect(() => {
-    fetch('https://thebookstore.azurewebsites.net/api/Category')
+    fetch('https://localhost:7229/api/Category')
       .then((res) => res.json())
       .then((json) => {
         setCateList(json);
@@ -25,20 +27,16 @@ export default function Category() {
 
 
   const RemoveCategory = (id) => {
-    alert(id)
     var token = JSON.parse(localStorage.getItem('token'))["accesstoken"];
-    fetch(`https://thebookstore.azurewebsites.net/api/Category/${id}`, {
+    console.log(token)
+    fetch(`https://localhost:7229/api/Category/${id}`, {
       method: 'delete',
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       }
     })
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json)
-      });
-
+    window.location = '/admin/category'
   }
 
   const AddCategory = () => {
@@ -46,7 +44,7 @@ export default function Category() {
     const createDate = Date.now();
     var token = JSON.parse(localStorage.getItem('token'))["accesstoken"];
     console.log(token);
-    fetch('https://thebookstore.azurewebsites.net/api/Category', {
+    fetch('https://localhost:7229/api/Category', {
       method: 'post',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -61,73 +59,62 @@ export default function Category() {
       }),
     })
       .then((res) => res.json())
-      .then((json) => {
-        console.log(json)
+      .then((res) => {
+        console.log(res)
       });
   }
-
-  const ramDomId = (min, max) => {
-    return Math.floor(Math.random() * 100);
-  }
-
-
 
   return (
     <>
       <div className='category-container'>
-        <span><FaAngleRight /></span>
-        <h2>Thể Loại</h2>
-      </div>
 
+        <div className='category-content'>
+          <div className='category-type'>
+            <label>Category</label>
+            <input
+              onChange={(e) => { setName(e.target.value) }}
+              placeholder='Category name ... '
+              required />
+            <label>Description</label>
+            <input
+              onChange={(e) => { setDescription(e.target.value) }}
+              placeholder='Description ... '
+              required />
+            <button
+              onClick={() => { AddCategory() }}>Add</button>
+          </div>
+          <h1>List Category</h1>
+          <ol className='category-list' >
+            <table>
 
-
-      <div className='category-content'>
-        <div className='category-type'>
-          <label>Category</label>
-          <input
-            onChange={(e) => { setName(e.target.value) }}
-            placeholder='Category name ... '
-            required />
-          <label>Description</label>
-          <input
-            onChange={(e) => { setDescription(e.target.value) }}
-            placeholder='Description ... '
-            required />
-          <button
-            onClick={() => AddCategory()}>Add</button>
-        </div>
-        <h1>List Description</h1>
-        <ol className='category-list' >
-          <table>
-
-            <thead >
-              <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Action</th>
-              </tr>
-
-            </thead>
-            <tbody >
-              {cateList.map(e =>
-                <tr key={e.id}>
-                  <td>{e.id}</td>
-                  <td>{e.name}</td>
-                  <td>{e.description}</td>
-                  <td>
-                    <button
-                      onClick={() => RemoveCategory(e.id)}
-                    >X
-                    </button></td>
+              <thead >
+                <tr>
+                  <th>Id</th>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Action</th>
                 </tr>
-              )}
-            </tbody>
-          </table>
-        </ol>
 
+              </thead>
+              <tbody >
+                {cateList.map(e =>
+                  <tr key={e.id}>
+                    <td>{e.id}</td>
+                    <td>{e.name}</td>
+                    <td>{e.description}</td>
+                    <td>
+                      <button
+                        onClick={() => RemoveCategory(e.id)}
+                      >X
+                      </button></td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </ol>
+
+        </div>
       </div>
-
 
     </>
 

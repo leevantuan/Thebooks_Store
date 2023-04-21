@@ -26,11 +26,10 @@
                 display: block;
                 width: 60px;
                 height: 30px;
-                border: 1px solid rgb(255, 196, 0);
-                margin: 20px 10px;
+                border: 1px solid rgb(255, 0, 0);
+                margin: 20px 0px;
                 font-size: 20px;
                 padding-left: 10px;
-                font-weight: bold;
                 background: rgb(255, 231, 152);
                 cursor: pointer;
                 transition: 0.3s;
@@ -72,4 +71,11 @@
             border-top: 1px solid rgb(194, 194, 194);
         }
     }
+}
+.action-btn{
+    margin-bottom: 0px;
+}
+.des{
+    min-height: 150px;
+    font-style: italic;
 }

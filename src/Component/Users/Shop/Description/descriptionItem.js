@@ -2,20 +2,56 @@ import React from 'react';
 import { FaStar } from 'react-icons/fa';
 import SliderTwo from '../../Home/Carousel/SliderTwo';
 import './description.scss';
+import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
-export default function Description(props) {
+import loginCheck from '../../../Authen/loginCheck.js'
+
+
+export default function Description() {
+    const [product, setProduct] = useState({
+        title: 'unknow',
+        description: 'unknow',
+        price: 'unknow',
+        quantity: 'unknow',
+        author: 'unknow',
+        imageurl: 'unknow',
+
+    });
+    const { id } = useParams();
+    useEffect(() => {
+        fetch(`https://localhost:7229/api/Products/${id}`)
+            .then((res) => res.json())
+            .then((json) => {
+                setProduct(json);
+            });
+    }, []);
+
+
+    const addToCart = () => {
+        var token = loginCheck()
+        fetch(`https://localhost:7229/api/Cart/add/username?productId=${id}`, {
+            method: 'post',
+            headers: {
+                'username': token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]
+            }
+        })
+            .then((res) => res.json())
+            .then((json) => {
+                console.log(json);
+            });
+    }
     return (
         <div className="description-container">
             <div className="description-content">
                 <div className="content-left">
-                    <img src={require('../../../../assets/product1.jpg')} alt="product" />
+                    <img src={product.imageUrl} alt="product" />
                 </div>
                 <div className="content-right">
-                    <h2>
-                        Hippity, Hoppity, Little Bunny - Finger Puppet Board Book for Easter Basket Gifts or Stuffer
-                        Ages 0-3 (Finger Puppet Book)
-                    </h2>
-                    <p>by Cottage Door Press (Author, Editor)</p>
+                    <h1>
+                        {product.title}
+                    </h1>
+                    <p>by {product.author}</p>
                     <ul>
                         <i>
                             <FaStar />
@@ -33,16 +69,12 @@ export default function Description(props) {
                             <FaStar />
                         </i>
                     </ul>
-                    <span>{props.id}</span>
-                    <p>
-                        Look no further than Hippity, Hoppity, Little Bunny for adorable nursery rhyme books. Follow the
-                        little bunny rabbit and its adorable bird friends in this finger puppet book as they hunt for
-                        Easter eggs. Wiggle the puppet to make the bunny in the story come alive! Boys and girls will
-                        love this board book surprise this holiday! Collect the entire series in the Finger Puppet
-                        Collection from Cottage Door Press!
+                    <span>{product.price}</span>
+                    <p className='des'>
+                        {product.description}
                     </p>
-                    <div>
-                        <button>Add to Cart</button>
+                    <div className='action-btn'>
+                        <button onClick={() => { addToCart() }}>Add to Cart</button>
                         <button>Buy Now</button>
                     </div>
                 </div>

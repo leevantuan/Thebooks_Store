@@ -184,6 +184,7 @@ ul {
         }
     }
     .product_body {
+        pointer-events: none;
         > tr {
             > td {
                 border-bottom: 1px solid #79797998;

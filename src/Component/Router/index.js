@@ -53,33 +53,31 @@ export default function Index(props) {
     const [products, setProduct] = useState([]);
     const [carts, setCart] = useState([]);
 
-    // const Email = useSelector(loginEmailSelector)
-    // var token = loginCheck()
-    // useEffect(() => {
-    //     if (token) {
-    //         username = token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]
 
-    //         fetch(`https://thebookstore.azurewebsites.net/api/Cart/username`, {
-    //             method: 'get',
-    //             headers: { username },
-    //         })
-    //             .then((res) => res.json())
-    //             .then((json) => {
-    //                 setCart(json);
-    //             });
-    //     } else {
-    //         username = "Login"
-    //         setCart([])
-    //     }
+    var token = loginCheck();
+    const username = token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]
 
-    //     fetch('https://thebookstore.azurewebsites.net/api/Products')
-    //         .then((res) => res.json())
-    //         .then((json) => {
-    //             setProduct(json);
-    //         });
-    // }, []);
+    useEffect(() => {
+        fetch('https://localhost:7229/api/Products')
+            .then((res) => res.json())
+            .then((json) => {
+                setProduct(json);
+            });
 
+        fetch(`https://localhost:7229/api/Cart/username`, {
+            method: 'get',
+            headers: { username },
+        })
+            .then((res) => res.json())
+            .then((json) => {
+                setCart(json);
+            });
 
+    }, []);
+
+    const getCartById = (id) => {
+        return carts.filter((e) => e.id == id);
+    }
     const getProductById = (id) => {
         return products.filter((e) => e.id == id);
     };
@@ -219,10 +217,13 @@ export default function Index(props) {
                                 {carts.map((e) => (
                                     <CartProduct
                                         key={e.id}
-                                        img={'https://thebookimage.blob.core.windows.net/productimg/product_28'}
+                                        id={e.productId}
+                                        img={getProductById(e.productId)[0].imageUrl}
                                         name={getProductById(e.productId)[0].title}
-                                        price={e.price}
+                                        price={e.productPrice}
                                         quantity={e.quantity}
+                                        cart={getCartById(e.id)[0]}
+                                        token={token}
                                     />
                                 ))}
                             </tbody>

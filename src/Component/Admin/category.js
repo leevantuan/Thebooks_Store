@@ -2,7 +2,7 @@ import { FaAngleRight } from "react-icons/fa";
 import clsx from 'clsx';
 import { useState, useEffect } from 'react';
 // <<<<<<< HEAD
-import loginCheck from '../Authen/loginCheck';
+
 import './admin.scss'
 
 

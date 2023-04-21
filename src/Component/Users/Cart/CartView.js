@@ -1,43 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import './cart.scss';
-import { FaStar } from 'react-icons/fa';
-import { FaRegHeart } from 'react-icons/fa';
-import { duration } from '@material-ui/core';
-import CartProduct from './Item/cartproduct';
-import ProductItem from '../Shop/Item/productItem';
-import { json } from 'react-router-dom';
+import loginCheck from '../../Authen/loginCheck';
 
-const username = 'user@example.com';
+import CartProduct from './Item/cartproduct';
+
+var token = loginCheck();
+
+const username = token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]
 export default function CartView() {
     const [products, setProduct] = useState([]);
     const [carts, setCart] = useState([]);
     const [showCart, setShowCart] = useState(true);
     useEffect(() => {
-        fetch('https://thebookstore.azurewebsites.net/api/Products')
+        fetch('https://localhost:7229/api/Products')
             .then((res) => res.json())
             .then((json) => {
-                console.log(json);
                 setProduct(json);
             });
 
-        fetch(`https://thebookstore.azurewebsites.net/api/Cart/username`, {
+        fetch(`https://localhost:7229/api/Cart/username`, {
             method: 'get',
             headers: { username },
         })
             .then((res) => res.json())
             .then((json) => {
-                console.log(json);
                 setCart(json);
             });
 
-        console.log(getProductById(28));
-        const btn = Array.from(document.getElementsByClassName('btn_cart'));
-        btn.forEach(function (button, index) { });
     }, []);
     const getProductById = (id) => {
         return products.filter((e) => e.id == id);
     };
+    const getCartById = (id) => {
+        return carts.filter((e) => e.id == id);
+    }
 
+    var totalPrice = 0;
+    carts.forEach(e => {
+        totalPrice += (e.productPrice * e.quantity)
+    });
     return (
         <div className="Cart-views">
             <h2>Cart</h2>
@@ -55,18 +56,22 @@ export default function CartView() {
                         {carts.map((e) => (
                             <CartProduct
                                 key={e.id}
-                                img={'https://thebookimage.blob.core.windows.net/productimg/product_28'}
+                                id={e.productId}
+                                img={getProductById(e.productId)[0].imageUrl}
                                 name={getProductById(e.productId)[0].title}
-                                price={e.price}
+                                price={e.productPrice}
                                 quantity={e.quantity}
+                                cart={getCartById(e.id)[0]}
+                                token={token}
                             />
                         ))}
                     </tbody>
-                    <div className="total-views">
-                        <p>Total: </p>
-                        <p>$200</p>
-                    </div>
+
                 </table>
+                <div className="total-views">
+                    <p>Total: </p>
+                    <p>$ {totalPrice}</p>
+                </div>
             </form>
             <div className="payment">
                 <h2>Payment</h2>
@@ -111,7 +116,7 @@ export default function CartView() {
                         </div>
                     </div>
 
-                    <button type="submit">Payment</button>
+                    <button type="submit">Buy Now</button>
                 </form>
             </div>
         </div>

@@ -41,6 +41,7 @@ export default function Description() {
                 console.log(json);
             });
     }
+    console.log(product.imageurl)
     return (
         <div className="description-container">
             <div className="description-content">

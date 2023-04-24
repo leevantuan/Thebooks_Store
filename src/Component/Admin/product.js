@@ -145,7 +145,6 @@ export default function Product() {
             .then((json) => {
                 console.log(json)
             });
-        window.location = '/admin/product'
     }
     return (
         <>

@@ -23,7 +23,7 @@ export default function ProductItem(props) {
     return (
         <>
             <Link className="product" to={`/Description/${props.id}`}>
-                <img src={props.img} alt="product" />
+                <img src={"http://localhost:3000/static/media/product1.9514463d2ada5f2f17ce.jpg"} alt="product" />
                 <h3>{props.name} </h3>
                 <p>{props.description}</p>
                 <ul>

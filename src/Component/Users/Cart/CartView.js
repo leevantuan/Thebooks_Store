@@ -5,8 +5,9 @@ import loginCheck from '../../Authen/loginCheck';
 import CartProduct from './Item/cartproduct';
 
 var token = loginCheck();
-
-const username = token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]
+var username = ""
+if (token)
+    username = token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]
 export default function CartView() {
     const [products, setProduct] = useState([]);
     const [carts, setCart] = useState([]);
@@ -39,6 +40,19 @@ export default function CartView() {
     carts.forEach(e => {
         totalPrice += (e.productPrice * e.quantity)
     });
+
+    const takeOrder = () => {
+        fetch(`https://localhost:7229/api/Cart/Order`, {
+            method: 'post',
+            headers: {
+                'username': token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]
+            }
+        })
+            .then((res) => res.json())
+            .then((json) => {
+                console.log(json);
+            });
+    }
     return (
         <div className="Cart-views">
             <h2>Cart</h2>
@@ -116,7 +130,9 @@ export default function CartView() {
                         </div>
                     </div>
 
-                    <button type="submit">Buy Now</button>
+                    <button onClick={() => {
+                        takeOrder();
+                    }}>Buy Now</button>
                 </form>
             </div>
         </div>

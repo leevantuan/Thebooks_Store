@@ -1,13 +1,32 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './profile.scss'
 
 import { FaUser } from "react-icons/fa";
 import { FaClipboardList } from "react-icons/fa";
+import loginCheck from '../../Authen/loginCheck';
 
 export default function Profile() {
     const [phoneNumber, setPhoneNumber] = useState(true)
     const [address, setAddress] = useState(true)
+    const [order, setOrder] = useState([])
 
+
+    var username = "";
+    const token = loginCheck()
+    if (token)
+        username = token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]
+    useEffect(() => {
+        fetch(`https://localhost:7229/api/Cart/Order`, {
+            method: 'get',
+            headers: { username },
+        })
+            .then((res) => res.json())
+            .then((json) => {
+                setOrder(json);
+            });
+    }, []);
+
+    console.log(order);
 
     const [myProfile, setMyProfile] = useState(true)
     const [myCart, setMyCart] = useState(false)
@@ -76,12 +95,13 @@ export default function Profile() {
 
                     </thead>
                     <tbody >
-                        <tr>
-                            <td>BCS Siêu To</td>
-                            <td>True</td>
+                        {order.map(e => <tr key={e.id}>
+                            <td>{e.userName}</td>
+                            <td>{e.totalPrice}</td>
                             <td>True</td>
                             <td>False</td>
-                        </tr>
+                        </tr>)}
+
                         <tr>
                             <td>BCS Siêu Khủng</td>
                             <td>True</td>

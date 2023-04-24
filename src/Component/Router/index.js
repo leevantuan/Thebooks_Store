@@ -53,9 +53,11 @@ export default function Index(props) {
     const [products, setProduct] = useState([]);
     const [carts, setCart] = useState([]);
 
+    var username = ""
 
     var token = loginCheck();
-    const username = token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]
+    if (token)
+        username = token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]
 
     useEffect(() => {
         fetch('https://localhost:7229/api/Products')
